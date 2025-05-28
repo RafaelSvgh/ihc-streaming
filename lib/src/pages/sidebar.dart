@@ -20,10 +20,16 @@ class _HomeLayoutState extends State<HomeLayout> {
     });
   }
 
+  // int _getSelectedIndex(String location) {
+  //   if (location.startsWith('/inicio')) return 0;
+  //   if (location.startsWith('/prueba')) return 1;
+  //   return -1;
+  // }
+
   @override
   Widget build(BuildContext context) {
     final currentRoute = GoRouterState.of(context).uri.toString();
-
+    print(currentRoute);
     return Scaffold(
       body: Row(
         children: [
@@ -49,13 +55,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                     icon: item['icon'] as IconData,
                     label: item['label'] as String,
                     route: item['route'] as String,
-                    isSelected: currentRoute == item['route'],
+                    isSelected: currentRoute.startsWith(
+                      item['route'] as String,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-
           // Main Content
           Expanded(child: widget.child),
         ],
