@@ -6,7 +6,6 @@ class NewClient {
   String? category;
 
   NewClient({this.name, this.email, this.origin, this.campaign, this.category});
-
 }
 
 class ContactedClient {
@@ -72,5 +71,30 @@ class DiscardedClient {
     this.origin,
     this.channel,
     this.reason,
+  });
+}
+
+class EventClient {
+  String? title;
+  String? date;
+  String? description;
+  String? link;
+  String? duration;
+
+  EventClient({
+    this.title,
+    this.date,
+    this.description,
+    this.link,
+    this.duration,
+  });
+}
+
+class NoteClient {
+  String? content;
+  String? date;
+  NoteClient({
+    this.content,
+    this.date,
   });
 }
