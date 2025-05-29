@@ -6,6 +6,7 @@ class NewClient {
   String? category;
 
   NewClient({this.name, this.email, this.origin, this.campaign, this.category});
+
 }
 
 class ContactedClient {

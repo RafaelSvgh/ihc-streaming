@@ -6,6 +6,7 @@ import 'package:streaming/src/pages/new_client_page.dart';
 import 'package:streaming/src/pages/sidebar.dart';
 import 'package:streaming/src/pages/initial_page.dart';
 import 'package:streaming/src/pages/prueba_page.dart';
+import 'package:streaming/src/pages/subscribed_client_page.dart';
 import 'package:streaming/src/pages/trial_client_page.dart';
 
 final router = GoRouter(
@@ -25,11 +26,6 @@ final router = GoRouter(
                 NewClient newClient =
                     state.extra as NewClient? ??
                     NewClient(
-                      name: '',
-                      email: '',
-                      origin: '',
-                      campaign: '',
-                      category: '',
                     );
                 return NewClientPage(newClient: newClient);
               },
@@ -40,11 +36,6 @@ final router = GoRouter(
                 ContactedClient contactedClient =
                     state.extra as ContactedClient? ??
                     ContactedClient(
-                      name: '',
-                      email: '',
-                      channel: '',
-                      interests: '',
-                      level: '',
                     );
                 return ContactedClientPage(contactedClient: contactedClient);
               },
@@ -55,13 +46,18 @@ final router = GoRouter(
                 TrialClient trialClient =
                     state.extra as TrialClient? ??
                     TrialClient(
-                      name: '',
-                      email: '',
-                      platform: '',
-                      duration: '',
-                      startDate: '',
                     );
                 return TrialClientPage(trialClient: trialClient);
+              },
+            ),
+            GoRoute(
+              path: 'suscritos',
+              builder: (context, state) {
+                SubscribedClient subscribedClient =
+                    state.extra as SubscribedClient? ??
+                    SubscribedClient(
+                    );
+                return SubscribedClientPage(subscribedClient: subscribedClient);
               },
             ),
             // GoRoute(

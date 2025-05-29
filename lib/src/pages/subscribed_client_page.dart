@@ -3,16 +3,16 @@ import 'package:streaming/src/models/client_model.dart';
 import 'package:streaming/src/theme/app_theme.dart';
 import 'package:streaming/src/widgets/app_bar_widget.dart';
 
-class TrialClientPage extends StatefulWidget {
-  final TrialClient trialClient;
-  const TrialClientPage({super.key, required this.trialClient});
+class SubscribedClientPage extends StatefulWidget {
+  final SubscribedClient subscribedClient;
+  const SubscribedClientPage({super.key, required this.subscribedClient});
 
   @override
-  State<TrialClientPage> createState() => _TrialClientPageState();
+  State<SubscribedClientPage> createState() => _SubscribedClientPageState();
 }
 
-class _TrialClientPageState extends State<TrialClientPage> {
-  TrialClient get trialClient => widget.trialClient;
+class _SubscribedClientPageState extends State<SubscribedClientPage> {
+  SubscribedClient get subscribedClient => widget.subscribedClient;
   bool isTimeline = false;
   bool isEvent = false;
   bool isNote = false;
@@ -766,9 +766,9 @@ class _TrialClientPageState extends State<TrialClientPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  trialClient.name!.isEmpty
+                  subscribedClient.name!.isEmpty
                       ? 'U'
-                      : trialClient.name![0].toUpperCase(),
+                      : subscribedClient.name![0].toUpperCase(),
                   style: TextStylesFull.subtitle,
                 ),
               ),
@@ -777,12 +777,12 @@ class _TrialClientPageState extends State<TrialClientPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    trialClient.name ?? 'Usuario',
+                    subscribedClient.name ?? 'Usuario',
                     style: TextStylesFull.clientName,
                     maxLines: 1,
                   ),
                   Text(
-                    trialClient.email ?? 'correo@user.com',
+                    subscribedClient.email ?? 'correo@user.com',
                     style: TextStylesFull.clientEmail,
                     maxLines: 1,
                   ),
@@ -794,7 +794,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
             width: screenWidth * 0.35,
             height: 60,
             decoration: BoxDecoration(
-              color: AppColors.trialClient,
+              color: AppColors.subscribedClient,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
