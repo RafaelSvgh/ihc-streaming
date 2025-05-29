@@ -7,7 +7,7 @@ Future<MessageClient?> messageForm(
   BuildContext context,
   String clientName,
   String clientEmail,
-  GlobalKey<FormState> globalKey
+  GlobalKey<FormState> globalKey,
 ) {
   final TextEditingController destinatarioController = TextEditingController(
     text: clientEmail,
@@ -181,9 +181,11 @@ Future<MessageClient?> messageForm(
                                         final String contenidoCorreo =
                                             contenidoController.text.trim();
                                         final DateTime now = DateTime.now();
-                                        final formato = DateFormat('dd/MM/yyyy - HH:mm');
-                                          final String fechaHoraFormateada =
-                                              formato.format(now); 
+                                        final formato = DateFormat(
+                                          'dd/MM/yyyy - HH:mm',
+                                        );
+                                        final String fechaHoraFormateada =
+                                            formato.format(now);
                                         print('--- Nuevo mensaje guardado ---');
                                         print('Para: $destinatario');
                                         print('Asunto: $asunto');
