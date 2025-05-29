@@ -5,7 +5,7 @@ import 'package:streaming/src/pages/contacted_client_page.dart';
 import 'package:streaming/src/pages/initial_page.dart';
 
 import 'package:streaming/src/pages/new_client_page.dart';
-import 'package:streaming/src/pages/prueba_page.dart';
+//import 'package:streaming/src/pages/prueba_page.dart';
 import 'package:streaming/src/pages/sidebar.dart';
 
 import 'package:streaming/src/pages/subscribed_client_page.dart';
@@ -82,10 +82,10 @@ final router = GoRouter(
             ),
           ],
         ),
-        GoRoute(
+        /*GoRoute(
           path: '/prueba',
           builder: (context, state) => const PruebaPage(),
-        ),
+        ),*/
 
       ],
     ),
