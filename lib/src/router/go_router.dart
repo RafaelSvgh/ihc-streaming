@@ -3,9 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:streaming/src/models/client_model.dart';
 import 'package:streaming/src/pages/contacted_client_page.dart';
 import 'package:streaming/src/pages/initial_page.dart';
+
 import 'package:streaming/src/pages/new_client_page.dart';
 import 'package:streaming/src/pages/prueba_page.dart';
 import 'package:streaming/src/pages/sidebar.dart';
+
+import 'package:streaming/src/pages/subscribed_client_page.dart';
 import 'package:streaming/src/pages/trial_client_page.dart';
 import 'package:streaming/src/pages/historial_view.dart';
 
@@ -23,15 +26,7 @@ final router = GoRouter(
             GoRoute(
               path: 'nuevos',
               builder: (context, state) {
-                NewClient newClient =
-                    state.extra as NewClient? ??
-                    NewClient(
-                      name: '',
-                      email: '',
-                      origin: '',
-                      campaign: '',
-                      category: '',
-                    );
+                NewClient newClient = state.extra as NewClient? ?? NewClient();
                 return NewClientPage(newClient: newClient);
               },
             ),
@@ -39,14 +34,7 @@ final router = GoRouter(
               path: 'contactados',
               builder: (context, state) {
                 ContactedClient contactedClient =
-                    state.extra as ContactedClient? ??
-                    ContactedClient(
-                      name: '',
-                      email: '',
-                      channel: '',
-                      interests: '',
-                      level: '',
-                    );
+                    state.extra as ContactedClient? ?? ContactedClient();
                 return ContactedClientPage(contactedClient: contactedClient);
               },
             ),
@@ -54,15 +42,16 @@ final router = GoRouter(
               path: 'prueba',
               builder: (context, state) {
                 TrialClient trialClient =
-                    state.extra as TrialClient? ??
-                    TrialClient(
-                      name: '',
-                      email: '',
-                      platform: '',
-                      duration: '',
-                      startDate: '',
-                    );
+                    state.extra as TrialClient? ?? TrialClient();
                 return TrialClientPage(trialClient: trialClient);
+              },
+            ),
+            GoRoute(
+              path: 'suscritos',
+              builder: (context, state) {
+                SubscribedClient subscribedClient =
+                    state.extra as SubscribedClient? ?? SubscribedClient();
+                return SubscribedClientPage(subscribedClient: subscribedClient);
               },
             ),
             // GoRoute(
@@ -97,6 +86,7 @@ final router = GoRouter(
           path: '/prueba',
           builder: (context, state) => const PruebaPage(),
         ),
+
       ],
     ),
   ],

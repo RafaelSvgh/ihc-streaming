@@ -202,3 +202,24 @@ List<DiscardedClient> discardedClientsList = [
     reason: 'No interesado',
   ),
 ];
+
+List<EventClient> eventClientsList = [
+  EventClient(
+    title: 'agendada',
+    date: '14/05/2025 - 15:30',
+    description: 'Explicar beneficios de la suscripción',
+    link: 'https://www.example.com/evento1',
+    duration: '1 hora',
+  ),
+];
+
+List<NoteClient> noteClientsList = [
+  NoteClient(
+    content: 'Llamar al cliente para confirmar suscripción',
+    date: '14/05/2025',
+  ),
+  NoteClient(
+    content: 'Enviar correo de bienvenida con detalles de la cuenta',
+    date: '14/05/2025',
+  ),
+];

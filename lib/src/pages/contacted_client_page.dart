@@ -296,46 +296,10 @@ class _ContactedClientPageState extends State<ContactedClientPage> {
                           ),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20,
-                                  left: 20,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton.icon(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_outlined,
-                                      ),
-                                      label: Text('Todos'),
-                                      iconAlignment: IconAlignment.end,
-                                    ),
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.primary,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                          size: 35,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              SizedBox(height: 20),
                               SizedBox(
                                 width: screenWidth * 0.60 - 40,
-                                height: screenHeight * 0.54,
+                                height: screenHeight * 0.65,
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [

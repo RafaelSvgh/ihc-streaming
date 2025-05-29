@@ -73,3 +73,28 @@ class DiscardedClient {
     this.reason,
   });
 }
+
+class EventClient {
+  String? title;
+  String? date;
+  String? description;
+  String? link;
+  String? duration;
+
+  EventClient({
+    this.title,
+    this.date,
+    this.description,
+    this.link,
+    this.duration,
+  });
+}
+
+class NoteClient {
+  String? content;
+  String? date;
+  NoteClient({
+    this.content,
+    this.date,
+  });
+}
