@@ -223,3 +223,27 @@ List<NoteClient> noteClientsList = [
     date: '14/05/2025',
   ),
 ];
+
+List<MessageClient> messageClientsList = [
+  MessageClient(
+    name: 'Juan Perez',
+    email: 'j.perez@gmail.com',
+    subject: 'Consulta sobre suscripción',
+    content: 'Hola Juan, gracias por tu interés en nuestros servicios.',
+    date: '14/05/2025',
+  ),
+  MessageClient(
+    name: 'Juan Perez',
+    email: 'j.perez@gmail.com',
+    subject: 'Consulta sobre suscripción',
+    content: 'Hola Juan, gracias por tu interés en nuestros servicios.',
+    date: '14/05/2025',
+  ),
+  MessageClient(
+    name: 'Juan Perez',
+    email: 'j.perez@gmail.com',
+    subject: 'Consulta sobre suscripción',
+    content: 'Hola Juan, gracias por tu interés en nuestros servicios.',
+    date: '14/05/2025',
+  ),
+];

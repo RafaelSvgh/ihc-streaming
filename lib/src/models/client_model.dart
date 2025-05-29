@@ -93,8 +93,14 @@ class EventClient {
 class NoteClient {
   String? content;
   String? date;
-  NoteClient({
-    this.content,
-    this.date,
-  });
+  NoteClient({this.content, this.date});
+}
+
+class MessageClient {
+  String? name;
+  String? email;
+  String? subject;
+  String? content;
+  String? date;
+  MessageClient({this.name, this.email, this.subject, this.content, this.date});
 }

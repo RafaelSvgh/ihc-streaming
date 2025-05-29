@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:streaming/src/data/clients_data.dart';
 import 'package:streaming/src/models/client_model.dart';
 import 'package:streaming/src/theme/app_theme.dart';
 import 'package:streaming/src/widgets/app_bar_widget.dart';
+import 'package:streaming/src/widgets/form_event.dart';
+import 'package:streaming/src/widgets/form_message.dart';
+import 'package:streaming/src/widgets/form_note.dart';
 
 class TrialClientPage extends StatefulWidget {
   final TrialClient trialClient;
@@ -13,10 +17,48 @@ class TrialClientPage extends StatefulWidget {
 
 class _TrialClientPageState extends State<TrialClientPage> {
   TrialClient get trialClient => widget.trialClient;
+  List<EventClient> eventClients = eventClientsList;
+  List<NoteClient> noteClients = noteClientsList;
+  List<MessageClient> messageClients = messageClientsList;
+  final _formKey = GlobalKey<FormState>();
+
   bool isTimeline = false;
   bool isEvent = false;
   bool isNote = false;
   bool isTrial = true;
+
+  void openDialogEvent() async {
+    final event = await eventForm(context, eventClients, _formKey);
+    if (event != null) {
+      setState(() {
+        eventClients.insert(0, event);
+      });
+    }
+  }
+
+  void openDialogNote() async {
+    final note = await noteForm(context, _formKey);
+    if (note != null) {
+      setState(() {
+        noteClients.insert(0, note);
+      });
+    }
+  }
+
+  void openDialogMessage() async {
+    final message = await messageForm(
+      context,
+      trialClient.name!,
+      trialClient.email!,
+      _formKey
+    );
+    if (message != null) {
+      setState(() {
+        messageClients.insert(0, message);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -221,7 +263,9 @@ class _TrialClientPageState extends State<TrialClientPage> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          openDialogEvent();
+                                        },
                                         icon: Icon(
                                           Icons.add,
                                           color: Colors.white,
@@ -237,11 +281,15 @@ class _TrialClientPageState extends State<TrialClientPage> {
                                 height: screenHeight * 0.54,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    children: [
-                                      _eventClient(screenWidth),
-                                      _eventClient(screenWidth),
-                                      _eventClient(screenWidth),
-                                    ],
+                                    children:
+                                        eventClients
+                                            .map(
+                                              (event) => _eventClient(
+                                                screenWidth,
+                                                event,
+                                              ),
+                                            )
+                                            .toList(),
                                   ),
                                 ),
                               ),
@@ -288,7 +336,9 @@ class _TrialClientPageState extends State<TrialClientPage> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          openDialogNote();
+                                        },
                                         icon: Icon(
                                           Icons.add,
                                           color: Colors.white,
@@ -304,11 +354,15 @@ class _TrialClientPageState extends State<TrialClientPage> {
                                 height: screenHeight * 0.54,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    children: [
-                                      _noteClient(screenWidth),
-                                      _noteClient(screenWidth),
-                                      _noteClient(screenWidth),
-                                    ],
+                                    children:
+                                        noteClients
+                                            .map(
+                                              (note) => _noteClient(
+                                                screenWidth,
+                                                note,
+                                              ),
+                                            )
+                                            .toList(),
                                   ),
                                 ),
                               ),
@@ -335,11 +389,15 @@ class _TrialClientPageState extends State<TrialClientPage> {
                                 height: screenHeight * 0.65,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    children: [
-                                      _timeLineClient(screenWidth),
-                                      _timeLineClient(screenWidth),
-                                      _timeLineClient(screenWidth),
-                                    ],
+                                    children:
+                                        messageClients
+                                            .map(
+                                              (message) => _timeLineClient(
+                                                screenWidth,
+                                                message,
+                                              ),
+                                            )
+                                            .toList(),
                                   ),
                                 ),
                               ),
@@ -512,7 +570,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
     );
   }
 
-  Container _timeLineClient(double screenWidth) {
+  Container _timeLineClient(double screenWidth, MessageClient message) {
     return Container(
       width: screenWidth * 0.60 - 40,
       decoration: BoxDecoration(color: Colors.white),
@@ -521,7 +579,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('10 de mayo, 2025'),
+          Text(message.date!),
           const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -569,13 +627,14 @@ class _TrialClientPageState extends State<TrialClientPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Asunto: Beneficios de la suscripción',
+                          message.subject!,
                           style: TextStylesMedium.clientName,
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'Estimado Juan Pérez, nos complace darle a conocer los beneficios de suscribirse a la plataforma Streaming. '
-                          'Con su suscripción, podrá disfrutar de acceso ilimitado a una amplia variedad de contenido exclusivo.',
+                          message.content!,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -589,7 +648,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
     );
   }
 
-  Container _eventClient(double screenWidth) {
+  Container _eventClient(double screenWidth, EventClient event) {
     return Container(
       height: 200,
       width: screenWidth * 0.60 - 40,
@@ -598,7 +657,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey.shade300, width: 1),
       ),
-      margin: const EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
           Container(
@@ -607,7 +666,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
               children: [
                 Icon(Icons.calendar_month_outlined),
                 const SizedBox(width: 10),
-                Text('Reunión agendada'),
+                Text('${event.title}'),
               ],
             ),
           ),
@@ -618,46 +677,46 @@ class _TrialClientPageState extends State<TrialClientPage> {
               children: [
                 Icon(Icons.access_time_outlined),
                 const SizedBox(width: 10),
-                Text('Fecha: 2023/10/01 - 15:30'),
+                Text('Fecha: ${event.date}'),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
+            child:event.description!.isNotEmpty? Row(
               children: [
                 Icon(Icons.segment_outlined),
                 const SizedBox(width: 10),
-                Text('Objetivo: Explicar beneficios de la suscripción'),
+                Text('Objetivo: ${event.description}'),
               ],
-            ),
+            ): null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
+            child:event.link!.isNotEmpty ? Row(
               children: [
                 Icon(Icons.link_outlined),
                 const SizedBox(width: 10),
-                Text('Google Meet: https://meet.google.com/abc-defg-hij'),
+                Text('Link: ${event.link}'),
               ],
-            ),
+            ): null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
+            child:event.duration!.isNotEmpty ? Row(
               children: [
                 Icon(Icons.alarm_outlined),
                 const SizedBox(width: 10),
-                Text('Recordatorio: 1 hora antes'),
+                Text('Duración: ${event.duration}'),
               ],
-            ),
+            ):null,
           ),
         ],
       ),
     );
   }
 
-  Container _noteClient(double screenWidth) {
+  Container _noteClient(double screenWidth, NoteClient note) {
     return Container(
       width: screenWidth * 0.60 - 40,
       decoration: BoxDecoration(
@@ -665,7 +724,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey.shade300, width: 1),
       ),
-      margin: const EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
           Container(
@@ -677,14 +736,14 @@ class _TrialClientPageState extends State<TrialClientPage> {
                   children: [
                     Icon(Icons.segment_outlined),
                     const SizedBox(width: 10),
-                    Text('Nota 1'),
+                    Text('Nota'),
                   ],
                 ),
                 Row(
                   children: [
                     Icon(Icons.calendar_month_outlined),
                     const SizedBox(width: 10),
-                    Text('2023/10/01'),
+                    Text(note.date!),
                   ],
                 ),
               ],
@@ -694,11 +753,7 @@ class _TrialClientPageState extends State<TrialClientPage> {
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.all(10),
-            child: Text(
-              'Esta es una nota de prueba para el cliente, '
-              'donde se registran los detalles importantes de la conversación. '
-              'Se pueden agregar más notas según sea necesario.',
-            ),
+            child: Text(note.content!),
           ),
         ],
       ),
@@ -843,7 +898,9 @@ class _TrialClientPageState extends State<TrialClientPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    openDialogMessage();
+                  },
                   icon: Icon(Icons.mail_outline, color: Colors.white),
                 ),
               ),
