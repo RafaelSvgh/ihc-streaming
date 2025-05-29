@@ -18,10 +18,11 @@ class _NewClientPageState extends State<NewClientPage> {
   NewClient get newClient => widget.newClient;
   List<EventClient> eventClients = eventClientsList;
   List<NoteClient> noteClients = noteClientsList;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isEvent = true;
 
   void openDialogEvent() async {
-    final event = await eventForm(context, eventClients);
+    final event = await eventForm(context, eventClients, _formKey);
     if (event != null) {
       setState(() {
         eventClients.insert(0, event);
@@ -30,7 +31,7 @@ class _NewClientPageState extends State<NewClientPage> {
   }
 
   void openDialogNote() async {
-    final note = await noteForm(context);
+    final note = await noteForm(context, _formKey);
     if (note != null) {
       setState(() {
         noteClients.insert(0, note);
@@ -320,33 +321,42 @@ class _NewClientPageState extends State<NewClientPage> {
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
-              children: [
-                Icon(Icons.segment_outlined),
-                const SizedBox(width: 10),
-                Text('Objetivo: ${event.description}'),
-              ],
-            ),
+            child:
+                event.description!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.segment_outlined),
+                        const SizedBox(width: 10),
+                        Text('Objetivo: ${event.description}'),
+                      ],
+                    )
+                    : null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
-              children: [
-                Icon(Icons.link_outlined),
-                const SizedBox(width: 10),
-                Text('Link: ${event.link}'),
-              ],
-            ),
+            child:
+                event.link!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.link_outlined),
+                        const SizedBox(width: 10),
+                        Text('Link: ${event.link}'),
+                      ],
+                    )
+                    : null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Row(
-              children: [
-                Icon(Icons.alarm_outlined),
-                const SizedBox(width: 10),
-                Text('Duración: ${event.duration}'),
-              ],
-            ),
+            child:
+                event.duration!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.alarm_outlined),
+                        const SizedBox(width: 10),
+                        Text('Duración: ${event.duration}'),
+                      ],
+                    )
+                    : null,
           ),
         ],
       ),
@@ -514,20 +524,7 @@ class _NewClientPageState extends State<NewClientPage> {
                   icon: Icon(Icons.phone_outlined, color: Colors.white),
                 ),
               ),
-              Container(
-                width: screenWidth * 0.038,
-                height: 45,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xffA7C2F3),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.mail_outline, color: Colors.white),
-                ),
-              ),
-              const SizedBox(width: 0),
+              SizedBox(width: 10),
             ],
           ),
         ],
