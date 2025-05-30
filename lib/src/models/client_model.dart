@@ -14,6 +14,8 @@ class ContactedClient {
   String? channel;
   String? interests;
   String? level;
+  String? lastContact;
+  String? origin;
 
   ContactedClient({
     this.name,
@@ -21,6 +23,8 @@ class ContactedClient {
     this.channel,
     this.interests,
     this.level,
+    this.lastContact,
+    this.origin,
   });
 }
 
@@ -30,6 +34,8 @@ class TrialClient {
   String? platform;
   String? duration;
   String? startDate;
+  String? lastContact;
+  String? origin;
 
   TrialClient({
     this.name,
@@ -37,6 +43,8 @@ class TrialClient {
     this.platform,
     this.duration,
     this.startDate,
+    this.lastContact,
+    this.origin,
   });
 }
 
@@ -47,6 +55,8 @@ class SubscribedClient {
   String? plan;
   String? startDate;
   String? endDate;
+  String? lastContact;
+  String? origin;
 
   SubscribedClient({
     this.name,
@@ -55,6 +65,8 @@ class SubscribedClient {
     this.platform,
     this.startDate,
     this.endDate,
+    this.lastContact,
+    this.origin,
   });
 }
 
@@ -64,6 +76,7 @@ class DiscardedClient {
   String? origin;
   String? channel;
   String? reason;
+  String? lastContact;
 
   DiscardedClient({
     this.name,
@@ -71,6 +84,7 @@ class DiscardedClient {
     this.origin,
     this.channel,
     this.reason,
+    this.lastContact,
   });
 }
 

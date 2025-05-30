@@ -35,14 +35,28 @@ class HistorialView extends StatelessWidget {
                 DataColumn(label: Text('Canal')),
                 DataColumn(label: Text('Intereses')),
                 DataColumn(label: Text('Nivel')),
+                DataColumn(label: Text('Último contacto')),
+                DataColumn(label: Text('Origen')),
+                DataColumn(label: Text('Acciones')),
               ],
-              rowBuilder: (client) => [
-                DataCell(Text(client.name ?? '')),
-                DataCell(Text(client.email ?? '')),
-                DataCell(Text(client.channel ?? '')),
-                DataCell(Text(client.interests ?? '')),
-                DataCell(Text(client.level ?? '')),
-              ],
+              rowBuilder:
+                  (client) => [
+                    DataCell(Text(client.name ?? '')),
+                    DataCell(Text(client.email ?? '')),
+                    DataCell(Text(client.channel ?? '')),
+                    DataCell(Text(client.interests ?? '')),
+                    DataCell(Text(client.level ?? '')),
+                    DataCell(Text(client.lastContact ?? '')),
+                    DataCell(Text(client.origin ?? '')),
+                    DataCell(
+                      IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {
+                          // Define action here
+                        },
+                      ),
+                    ),
+                  ],
             ),
             // Prueba gratis
             GenericTable<TrialClient>(
@@ -53,14 +67,28 @@ class HistorialView extends StatelessWidget {
                 DataColumn(label: Text('Plataforma')),
                 DataColumn(label: Text('Duración')),
                 DataColumn(label: Text('Inicio')),
+                DataColumn(label: Text('Último contacto')),
+                DataColumn(label: Text('Origen')),
+                DataColumn(label: Text('Acciones')),
               ],
-              rowBuilder: (client) => [
-                DataCell(Text(client.name ?? '')),
-                DataCell(Text(client.email ?? '')),
-                DataCell(Text(client.platform ?? '')),
-                DataCell(Text(client.duration ?? '')),
-                DataCell(Text(client.startDate ?? '')),
-              ],
+              rowBuilder:
+                  (client) => [
+                    DataCell(Text(client.name ?? '')),
+                    DataCell(Text(client.email ?? '')),
+                    DataCell(Text(client.platform ?? '')),
+                    DataCell(Text(client.duration ?? '')),
+                    DataCell(Text(client.startDate ?? '')),
+                    DataCell(Text(client.lastContact ?? '')),
+                    DataCell(Text(client.origin ?? '')),
+                    DataCell(
+                      IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {
+                          // Define action here
+                        },
+                      ),
+                    ),
+                  ],
             ),
             // Suscritos
             GenericTable<SubscribedClient>(
@@ -72,15 +100,29 @@ class HistorialView extends StatelessWidget {
                 DataColumn(label: Text('Plan')),
                 DataColumn(label: Text('Inicio')),
                 DataColumn(label: Text('Fin')),
+                DataColumn(label: Text('Último contacto')),
+                DataColumn(label: Text('Origen')),
+                DataColumn(label: Text('Acciones')),
               ],
-              rowBuilder: (client) => [
-                DataCell(Text(client.name ?? '')),
-                DataCell(Text(client.email ?? '')),
-                DataCell(Text(client.platform ?? '')),
-                DataCell(Text(client.plan ?? '')),
-                DataCell(Text(client.startDate ?? '')),
-                DataCell(Text(client.endDate ?? '')),
-              ],
+              rowBuilder:
+                  (client) => [
+                    DataCell(Text(client.name ?? '')),
+                    DataCell(Text(client.email ?? '')),
+                    DataCell(Text(client.platform ?? '')),
+                    DataCell(Text(client.plan ?? '')),
+                    DataCell(Text(client.startDate ?? '')),
+                    DataCell(Text(client.endDate ?? '')),
+                    DataCell(Text(client.lastContact ?? '')),
+                    DataCell(Text(client.origin ?? '')),
+                    DataCell(
+                      IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {
+                          // Define action here
+                        },
+                      ),
+                    ),
+                  ],
             ),
             // Descartados
             GenericTable<DiscardedClient>(
@@ -91,14 +133,26 @@ class HistorialView extends StatelessWidget {
                 DataColumn(label: Text('Origen')),
                 DataColumn(label: Text('Canal')),
                 DataColumn(label: Text('Razón')),
+                DataColumn(label: Text('Último contacto')),
+                DataColumn(label: Text('Acciones')),
               ],
-              rowBuilder: (client) => [
-                DataCell(Text(client.name ?? '')),
-                DataCell(Text(client.email ?? '')),
-                DataCell(Text(client.origin ?? '')),
-                DataCell(Text(client.channel ?? '')),
-                DataCell(Text(client.reason ?? '')),
-              ],
+              rowBuilder:
+                  (client) => [
+                    DataCell(Text(client.name ?? '')),
+                    DataCell(Text(client.email ?? '')),
+                    DataCell(Text(client.origin ?? '')),
+                    DataCell(Text(client.channel ?? '')),
+                    DataCell(Text(client.reason ?? '')),
+                    DataCell(Text(client.lastContact ?? '')),
+                    DataCell(
+                      IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {
+                          // Define action here
+                        },
+                      ),
+                    ),
+                  ],
             ),
           ],
         ),

@@ -82,11 +82,11 @@ final router = GoRouter(
             ),
           ],
         ),
+
         /*GoRoute(
           path: '/prueba',
           builder: (context, state) => const PruebaPage(),
         ),*/
-
       ],
     ),
   ],
@@ -100,4 +100,9 @@ final menuItems = [
   },
   {'icon': Icons.settings, 'label': 'Plataforma y Planes', 'route': '/prueba'},
   {'icon': Icons.history, 'label': 'historial', 'route': '/historial'},
+  {'icon': Icons.mail, 'label': 'Mail', 'route': '/mail'},
+  {'icon': Icons.calendar_today, 'label': 'Calendario', 'route': '/calendario'},
+  {'icon': Icons.insert_chart, 'label': 'Informes', 'route': '/informes'},
+  {'icon': Icons.settings, 'label': 'Configuración', 'route': '/configuracion'},
+  {'icon': Icons.help, 'label': 'Ayuda', 'route': '/ayuda'},
 ];
