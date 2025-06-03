@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 Widget buildPlantillaDropdown(
-    String tipoUsuario, void Function(String?) onChanged) {
+  String tipoUsuario,
+  void Function(String?) onChanged,
+) {
   final plantillas = plantillasPorTipo[tipoUsuario];
 
   if (plantillas == null || plantillas.isEmpty) return const SizedBox.shrink();
@@ -27,6 +29,12 @@ Widget buildPlantillaDropdown(
           style: const TextStyle(fontSize: 13),
           items: plantillas,
           onChanged: onChanged,
+          validator: (value) {
+            if (value != null && !RegExp(r'^[a-zA-Z0-9 ]+').hasMatch(value)) {
+              return 'Caracteres no válidos en la plantilla';
+            }
+            return null;
+          },
         ),
       ),
     ],
@@ -36,18 +44,36 @@ Widget buildPlantillaDropdown(
 // Mapa de plantillas por tipo de usuario
 final Map<String, List<DropdownMenuItem<String>>> plantillasPorTipo = {
   'Contactado': [
-    DropdownMenuItem(value: 'Plantilla 1', child: Text('Beneficios de la suscripción')),
-    DropdownMenuItem(value: 'Plantilla 2', child: Text('Promoción nuevos suscriptores')),
+    DropdownMenuItem(
+      value: 'Plantilla 1',
+      child: Text('Beneficios de la suscripción'),
+    ),
+    DropdownMenuItem(
+      value: 'Plantilla 2',
+      child: Text('Promoción nuevos suscriptores'),
+    ),
   ],
   'Prueba': [
-    DropdownMenuItem(value: 'Plantilla 3', child: Text('Beneficios de la suscripción')),
-    DropdownMenuItem(value: 'Plantilla 4', child: Text('Promoción para nuevos suscriptores')),
-    DropdownMenuItem(value: 'Plantilla 5', child: Text('Recordatorio de fin de prueba gratis')),
+    DropdownMenuItem(
+      value: 'Plantilla 3',
+      child: Text('Beneficios de la suscripción'),
+    ),
+    DropdownMenuItem(
+      value: 'Plantilla 4',
+      child: Text('Promoción para nuevos suscriptores'),
+    ),
+    DropdownMenuItem(
+      value: 'Plantilla 5',
+      child: Text('Recordatorio de fin de prueba gratis'),
+    ),
   ],
   'Suscrito': [
     DropdownMenuItem(value: 'Plantilla 6', child: Text('Estrenos del mes')),
     DropdownMenuItem(value: 'Plantilla 7', child: Text('Promoción del mes')),
-    DropdownMenuItem(value: 'Plantilla 8', child: Text('Recordatorio de renovación')),
+    DropdownMenuItem(
+      value: 'Plantilla 8',
+      child: Text('Recordatorio de renovación'),
+    ),
   ],
 };
 
@@ -65,8 +91,7 @@ final Map<String, String> asuntoPorPlantilla = {
 
 // Contenido por plantilla
 final Map<String, String> contenidoPorPlantilla = {
-  'Plantilla 1':
-  '''¿Sabías que con una suscripción puedes disfrutar de:
+  'Plantilla 1': '''¿Sabías que con una suscripción puedes disfrutar de:
 • Acceso ilimitado a miles de películas, series y documentales.
 • Contenido exclusivo que no encontrarás en ningún otro lugar.
 • Ver en múltiples dispositivos sin interrupciones.
@@ -82,7 +107,8 @@ Miles de series y películas esperan por ti, desde los últimos estrenos hasta l
 
 No pierdas esta oportunidad única. ¡Activa tu suscripción ahora y vive la experiencia Premium!''',
 
-  'Plantilla 3': '''Estás disfrutando tu prueba gratis, pero queremos contarte por qué ser suscriptor es aún mejor:
+  'Plantilla 3':
+      '''Estás disfrutando tu prueba gratis, pero queremos contarte por qué ser suscriptor es aún mejor:
 • Acceso ilimitado a todos nuestros títulos sin interrupciones.
 • Contenido exclusivo solo para miembros.
 • Funcionalidad para descargar y ver offline.
@@ -90,13 +116,15 @@ No pierdas esta oportunidad única. ¡Activa tu suscripción ahora y vive la exp
 
 No dejes que termine tu prueba sin aprovechar todo lo que tenemos para ofrecerte. ''',
 
-  'Plantilla 4': '''Tu prueba gratuita está a punto de terminar y tenemos una promoción especial para ti:
+  'Plantilla 4':
+      '''Tu prueba gratuita está a punto de terminar y tenemos una promoción especial para ti:
 
 Suscríbete ahora y recibe un 30% de descuento en tu primer mes.
 
 Sigue disfrutando tus series y películas favoritas sin interrupciones y con todos los beneficios exclusivos.''',
 
-  'Plantilla 5': '''Queremos recordarte que tu prueba gratuita termina en pocos días.
+  'Plantilla 5':
+      '''Queremos recordarte que tu prueba gratuita termina en pocos días.
 
 Para seguir disfrutando de todas las series, películas y documentales sin interrupciones, suscríbete hoy y aprovecha nuestra oferta especial.
 
@@ -112,13 +140,15 @@ No te quedes sin entretenimiento.''',
 
 Con tu suscripción, accede a estos y muchos otros títulos nuevos. ¡Que no te los cuenten, vívelos!''',
 
-  'Plantilla 7': '''Porque valoramos que seas parte de nuestra plataforma, tenemos una promoción exclusiva para ti:
+  'Plantilla 7':
+      '''Porque valoramos que seas parte de nuestra plataforma, tenemos una promoción exclusiva para ti:
 
 Renueva tu suscripción ahora y recibe un mes gratis para seguir disfrutando de tu contenido favorito sin interrupciones.
 
 No esperes más, tu entretenimiento continúa.''',
 
-  'Plantilla 8': '''Te informamos que tu suscripción se renovará automáticamente en los próximos días.
+  'Plantilla 8':
+      '''Te informamos que tu suscripción se renovará automáticamente en los próximos días.
   
 Si deseas mantener el acceso ilimitado a series, películas y documentales, no tienes que hacer nada.
 

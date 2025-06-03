@@ -134,10 +134,28 @@ Future<MessageClient?> messageForm(
                                 buildPlantillaDropdown(tipoCliente, (value) {
                                   setState(() {
                                     plantillaSeleccionada = value;
-                                    asuntoController.text =
+                                    final asunto =
                                         asuntoPorPlantilla[value] ?? '';
-                                    contenidoController.text =
+                                    final contenido =
                                         'Hola, $clientName\n\n${contenidoPorPlantilla[value] ?? ''}';
+
+                                    if (RegExp(
+                                      r'^[a-zA-Z0-9 \n]+',
+                                    ).hasMatch(asunto)) {
+                                      asuntoController.text = asunto;
+                                    } else {
+                                      asuntoController.text =
+                                          'Caracteres no válidos en el asunto';
+                                    }
+
+                                    if (RegExp(
+                                      r'^[a-zA-Z0-9 \n]+',
+                                    ).hasMatch(contenido)) {
+                                      contenidoController.text = contenido;
+                                    } else {
+                                      contenidoController.text =
+                                          'Caracteres no válidos en el contenido';
+                                    }
                                   });
                                 }),
 

@@ -6,6 +6,7 @@ import 'package:streaming/src/widgets/app_bar_widget.dart';
 import 'package:streaming/src/widgets/form_event.dart';
 import 'package:streaming/src/widgets/form_message.dart';
 import 'package:streaming/src/widgets/form_note.dart';
+import 'package:flutter/services.dart';
 
 class ContactedClientPage extends StatefulWidget {
   final ContactedClient contactedClient;
@@ -54,6 +55,44 @@ class _ContactedClientPageState extends State<ContactedClientPage> {
       setState(() {
         messageClients.insert(0, message);
       });
+    }
+  }
+
+  void openDialogPhoneNumber() async {
+    final phoneNumber = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        String input = '';
+        return AlertDialog(
+          title: Text('Digite el número de teléfono'),
+          content: TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            onChanged: (value) {
+              input = value;
+            },
+            decoration: InputDecoration(hintText: 'Phone Number'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(input);
+              },
+            ),
+          ],
+        );
+      },
+    );
+    if (phoneNumber != null) {
+      // Handle the phone number
+      print('Phone Number: $phoneNumber');
     }
   }
 
@@ -492,33 +531,42 @@ class _ContactedClientPageState extends State<ContactedClientPage> {
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child:event.description!.isNotEmpty ? Row(
-              children: [
-                Icon(Icons.segment_outlined),
-                const SizedBox(width: 10),
-                Text('Objetivo: ${event.description}'),
-              ],
-            ): null,
+            child:
+                event.description!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.segment_outlined),
+                        const SizedBox(width: 10),
+                        Text('Objetivo: ${event.description}'),
+                      ],
+                    )
+                    : null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child:event.link!.isNotEmpty ? Row(
-              children: [
-                Icon(Icons.link_outlined),
-                const SizedBox(width: 10),
-                Text('Link: ${event.link}'),
-              ],
-            ) : null,
+            child:
+                event.link!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.link_outlined),
+                        const SizedBox(width: 10),
+                        Text('Link: ${event.link}'),
+                      ],
+                    )
+                    : null,
           ),
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10),
-            child:event.duration!.isNotEmpty ? Row(
-              children: [
-                Icon(Icons.alarm_outlined),
-                const SizedBox(width: 10),
-                Text('Duración: ${event.duration}'),
-              ],
-            ) : null,
+            child:
+                event.duration!.isNotEmpty
+                    ? Row(
+                      children: [
+                        Icon(Icons.alarm_outlined),
+                        const SizedBox(width: 10),
+                        Text('Duración: ${event.duration}'),
+                      ],
+                    )
+                    : null,
           ),
         ],
       ),
@@ -682,7 +730,9 @@ class _ContactedClientPageState extends State<ContactedClientPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    openDialogPhoneNumber();
+                  },
                   icon: Icon(Icons.phone_outlined, color: Colors.white),
                 ),
               ),

@@ -54,6 +54,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'Email',
     interests: 'Tecnología',
     level: 'Alto',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
   ContactedClient(
     name: 'Lucía Gómez',
@@ -61,6 +63,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'Chat',
     interests: 'Moda',
     level: 'Medio',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
   ContactedClient(
     name: 'Roberto Díaz',
@@ -68,6 +72,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'Llamada',
     interests: 'Deportes',
     level: 'Bajo',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
   ContactedClient(
     name: 'Elena Martínez',
@@ -75,6 +81,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'WhatsApp',
     interests: 'Viajes',
     level: 'Alto',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
   ContactedClient(
     name: 'Javier Torres',
@@ -89,6 +97,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'Chat',
     interests: 'Cine',
     level: 'Bajo',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
   ContactedClient(
     name: 'Carlos Ruiz',
@@ -96,6 +106,8 @@ List<ContactedClient> contactedClientsList = [
     channel: 'Llamada',
     interests: 'Tecnología',
     level: 'Alto',
+    lastContact: '14/05/2025',
+    origin: 'Facebook',
   ),
 ];
 
